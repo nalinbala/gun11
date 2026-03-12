@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gun Violence in 2025 - In Memoriam & Analysis</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@300;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  </head>
+  <body>
+    <svg
+      id="visual-stage"
+      viewBox="0 0 1920 1080"
+      preserveAspectRatio="xMidYMid slice"
+    ></svg>
+
+    <div class="intro-wrapper">
+      <div class="viewport-fade top-fade"></div>
+
+      <div class="scrollytelling-content">
+        <header class="main-heading">
+          <h1 class="title-main">Gun Violence in 2025</h1>
+          <h2 class="title-sub">Numbers and Patterns</h2>
+        </header>
+
+        <p class="names-text">
+          Akash Tharuka (26), Sudath Gomes (36), Chanaka Vimukthi (20),
+          Saveriyan Arul (61), Selvakumar Jude (42), Savindu Tharindu (24),
+          Indunil Saman Kumara (55), Chathuranga Kumara (34) M. Neville ( ),
+          Jagath Ravindra Samarasinghe (35), Kenistan Nato (44), Aruna
+          Vidanagamage (39), Sanjeewa Kumara Samararathne (43), Ayoshanta
+          Bopayaarachchi (40), Shashi Kumar (38), Inulima Nethmi Banneheka (9),
+          Siridath Dhammika (61), Thirimadura Nishantha Mendis (45), Pasindu
+          Tharaka (29), Yomesh Nadeeshan (28), Dan Priyasad (39), Kasun
+          Harischandra (35), Mahadura Nalin Wasantha (52), Nissanka Peiris (19),
+          Chamal Abeykoon (40 ), Kalum Tushara (26 ), Iranta Suranjana (22),
+          Upali Kulawardhana (50), Ratnayake Mudiyanselage Upul Amarajith
+          Ratnayake (45), Chaturani (Sandamali) (30), Arun Mendis (23),
+          Dissanayake Mudiyanselage Nimesh Kalum Kumara (23), Suresh Madushan
+          (23), Shantha Mudunkotuwa (46), Ayyappan Prabhu (45), Lalith Kumara
+          Kodagoda (57), Gihan Dulan Perera (21), Dhanushka Udaya Shanta (35),
+          Heshan Salinda Pushpakumara (26), Padmasiri Gardiyawasam (58), Pasindu
+          Heshan (28), Imesha Madhubashni (28), Lasantha Wickramasekara (38),
+          Mirantha Varushavithana (54), Balachandran Pushparaj (43), Roshika
+          Shamen (48), J.H. Wijath (68), H. Pushpa (58), Aminda Pradeep (34),
+          Shriran Kosala de Silva (47), Chandima Sachintha Perera (26)
+        </p>
+
+        <div class="bridge-section">
+          <p class="bridge-paragraph">
+            These are the names of fifty-three individuals whose lives were
+            taken by gunfire last year. They are not just statistics; behind
+            each name on this list is a life full of promise, suddenly ended by
+            a bullet.
+          </p>
+        </div>
+      </div>
+
+      <div class="viewport-fade bottom-fade"></div>
+    </div>
+
+    <section class="intro-sequence">
+      <canvas id="shooting-canvas"></canvas>
+    </section>
+
+    <svg
+      id="visual-stage"
+      viewBox="0 0 1920 1080"
+      preserveAspectRatio="xMidYMid slice"
+    ></svg>
+
+    <div id="d3-legend">
+      <div class="legend-item">
+        <span class="legend-dot female"></span> Female
+      </div>
+      <div class="legend-item"><span class="legend-dot male"></span> Male</div>
+    </div>
+
+    <div id="d3-age-legend">
+      <div class="age-guide-title">Color guide for Age</div>
+      <div class="age-gradient-bar"></div>
+      <div class="age-labels">
+        <span>6</span>
+        <span>12</span>
+        <span>18</span>
+        <span>30</span>
+        <span>45</span>
+        <span>60</span>
+        <span>68</span>
+      </div>
+    </div>
+
+    <main class="d3-scrollytelling">
+      <section class="step" data-state="state_total">
+        <div class="content">
+          <h1>60 Lives Lost</h1>
+          <p>A visual analysis of shooting incidents in 2025.</p>
+        </div>
+      </section>
+
+      <section class="step" data-state="state_age">
+        <div class="content">
+          <h2>Age Breakdown</h2>
+          <p>From a 6-year-old child to a 68-year-old adult.</p>
+        </div>
+      </section>
+
+      <section class="step" data-state="state_gender">
+        <div class="content">
+          <h2>Gender Split</h2>
+          <p>90% Male, 10% Female.</p>
+        </div>
+      </section>
+
+      <section class="step" data-state="state_motivation">
+        <div class="content">
+          <h2>The Motivation</h2>
+          <p>Organized crime drives the violence.</p>
+        </div>
+      </section>
+
+      <section class="step" data-state="state_district">
+        <div class="content">
+          <h2>Location</h2>
+          <p>Colombo remains the epicenter.</p>
+        </div>
+      </section>
+
+      <section class="step" data-state="state_month">
+        <div class="content">
+          <h2>A Year of Loss</h2>
+          <p>
+            Analyzing the timeline reveals stark spikes in violence during
+            January and February.
+          </p>
+        </div>
+      </section>
+
+      <section class="spacer"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

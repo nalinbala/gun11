@@ -1,0 +1,309 @@
+/* --- GLOBAL STYLES --- */
+/* --- GLOBAL STYLES --- */
+html {
+  margin: 0;
+  padding: 0;
+  /* Let the html tag behave naturally without overflow rules */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-family: "Roboto", sans-serif;
+  /* Apply the hidden overflow ONLY to the body to prevent the scroll trap */
+  overflow-x: hidden;
+  height: auto;
+}
+
+/* --- THE FIXED D3 STAGE --- */
+#visual-stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent; /* Lets the body background show through */
+}
+
+/* --- PART 1: INTRO WRAPPER (DARK MODE) --- */
+.intro-wrapper {
+  position: relative;
+  background-color: black;
+  z-index: 10;
+}
+
+/* The Cinematic Sticky Shadows */
+.viewport-fade {
+  position: sticky;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+  z-index: 50;
+  pointer-events: none;
+}
+.top-fade {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.bottom-fade {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  margin-top: -15vh; /* Prevents the sticky div from pushing content down */
+}
+
+.scrollytelling-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* Intro Typography */
+.main-heading {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.title-main {
+  color: #ffffff;
+  font-family: "Merriweather", serif;
+  font-size: 80px;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.title-sub {
+  color: #a0a0a0;
+  font-size: 26px;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.names-text {
+  color: #817f7f;
+  font-family: "Merriweather", serif;
+  font-size: 48px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 40px;
+  margin-top: 50vh;
+}
+
+.bridge-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20vh;
+  padding-bottom: 40vh;
+}
+
+.bridge-paragraph {
+  color: #ffffff;
+  font-family: "Merriweather", serif;
+  font-size: 28px;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 900px;
+  font-weight: 300;
+}
+
+/* --- PART 2: GSAP CANVAS TRANSITION --- */
+.intro-sequence {
+  height: 100vh;
+  width: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 100; /* Pulls it above the intro shadows */
+}
+
+/* REPLACE YOUR CURRENT CANVAS CSS WITH THIS: */
+#shooting-canvas {
+  width: 100%; /* Changed from 100vw to 100% to fix double scrollbar */
+  height: 100vh;
+  object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* --- PART 3: D3 STATISTICS SECTIONS --- */
+main.d3-scrollytelling {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- NEW: D3 LEGEND STYLING --- */
+#d3-legend {
+  position: fixed;
+  top: 5vh;
+  right: 5vw;
+  display: flex;
+  gap: 20px;
+  z-index: 20;
+  opacity: 0; /* Hidden until the user scrolls to the D3 section */
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+#d3-legend.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #4a4a4a;
+}
+.legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+.legend-dot.female {
+  background-color: #ee6c4d;
+}
+.legend-dot.male {
+  background-color: #3e5c76;
+}
+
+/* --- UPDATED: TEXT STEPS --- */
+.step {
+  height: 100vh; /* Acts purely as an invisible scroll area now */
+}
+
+.content {
+  position: fixed;
+  top: 12vh; /* Locks text to the top center */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  max-width: 800px;
+  opacity: 0; /* Hidden by default */
+  visibility: hidden;
+  z-index: 15;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  pointer-events: none; /* Prevents text from blocking clicks */
+}
+
+/* GSAP will add this class to fade the text in */
+.content.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.content h1,
+.content h2 {
+  font-size: 2.0rem;
+  font-family: "Source Sans Pro", sans-serif; /* Changed to Source Sans Pro */
+  font-weight: 700; /* Forced bold weight */
+  color: #1a1a1a;
+  margin-top: 0;
+}
+
+.content p {
+  color: #4a4a4a;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.spacer {
+  height: 50vh;
+}
+
+/* --- UPDATED: D3 LEGEND STYLING --- */
+/* (Keep your #d3-legend style the same, just adjust right/top if needed) */
+
+/* ADD THIS: AGE GUIDE STYLING */
+#d3-legend,
+#d3-age-legend {
+  position: fixed;
+  top: 5vh;
+  right: 5vw;
+  z-index: 20;
+  opacity: 0; /* Hidden by default at top of page */
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+
+#d3-age-legend {
+  width: 250px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* MASTER VISIBILITY SWITCH: 
+  Legends ONLY appear if GSAP adds "show-legends" to the body, 
+  AND the JS has marked them as the "active-legend".
+*/
+body.show-legends #d3-legend.active-legend,
+body.show-legends #d3-age-legend.active-legend {
+  opacity: 1;
+  visibility: visible;
+}
+
+.age-guide-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #4a4a4a;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.age-gradient-bar {
+  height: 15px;
+  border-radius: 4px;
+  /* CSS Gradient mirroring the colors in your provided image */
+  background: linear-gradient(
+    to right,
+    #1e6b3c 0%,
+    /* 6 years */ #4cb050 9%,
+    /* 12 years */ #ffeb3b 18%,
+    /* 18 years */ #ff9800 36%,
+    /* 30 years */ #f44336 58%,
+    /* 45 years */ #b71c1c 80%,
+    /* 60 years */ #880e4f 100% /* 68 years */
+  );
+}
+
+.age-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: #1a1a1a;
+  margin-top: 4px;
+  font-weight: 500;
+}
